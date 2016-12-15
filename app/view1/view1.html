@@ -1,0 +1,57 @@
+<div ng-controller="View1Ctrl as vm">
+    <form name="authForm" role="form" novalidate>
+        <div class="row" style="vertical-align: middle">
+            <div class="col-sm-4 col-sm-offset-5">
+                <div class="form-group has-feedback has-clear" ng-class="{ 'has-error': authForm.loginInput.$touched && authForm.loginInput.$invalid }">
+                    <input id="login"
+                           name="loginInput"
+                           clear-input
+                           type="text"
+                           autofocus
+                           required
+                           ng-minlength="3"
+                           ng-maxlength="30"
+                           class="form-control"
+                           ng-model="vm.login"
+                           placeholder="Логин"
+                           style="width: 200px;">
+                    <div class="help-block" ng-messages="authForm.loginInput.$error" ng-if="authForm.loginInput.$touched">
+                        <p ng-message="minlength"><small>Логин не менее 3 символов</small></p>
+                        <p ng-message="maxlength"><small>Логин не более 30 символов</small></p>
+                        <p ng-message="required"><small>Логин обязателен</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-sm-offset-5">
+                <div class="form-group" ng-class="{ 'has-error': authForm.passwordInput.$touched && authForm.passwordInput.$invalid }">
+                    <input id="password"
+			   ng-disabled="!vm.login.length"
+                           name="passwordInput"
+                           type="password"
+                           required
+                           ng-minlength="3"
+                           ng-maxlength="30"
+                           class="form-control"
+                           ng-model="vm.password"
+                           placeholder="Пароль"
+                           style="width: 200px;">
+                    <div class="help-block" ng-messages="authForm.passwordInput.$error" ng-if="authForm.passwordInput.$touched">
+                        <p ng-message="minlength"><small>Пароль не менее 3 символов</small></p>
+                        <p ng-message="maxlength"><small>Пароль не более 30 символов</small></p>
+                        <p ng-message="required"><small>Пароль обязателен</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-5">
+                <div class="form-group">
+                    <button id="btnSubmit" ng-disabled="vm.processLogin || authForm.loginInput.$invalid || authForm.passwordInput.$invalid" type="submit" class="btn btn-primary btn-width" style="width: 200px;"
+                            ng-click="vm.doLogin()"
+                            >Войти
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
